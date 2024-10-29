@@ -1,0 +1,58 @@
+Code 01: Greeting Component Conversion
+---------------------------------------
+
+import React from 'react';
+
+// Step 1: Define the type for the props
+interface GreetingProps {
+  name: string; // `name` prop must be a string
+}
+
+// Step 2: Use the `GreetingProps` type in the functional component
+const Greeting: React.FC<GreetingProps> = ({ name }) => {
+  return <div>Hello, {name}!</div>;
+};
+
+export default Greeting;
+Explanation
+The GreetingProps interface is created to define the expected props.
+By using React.FC<GreetingProps>, I’m defining Greeting as a functional component with GreetingProps as its prop type.
+
+
+Code 02: Counter Component Conversion
+-------------------------------------
+
+import React, { Component } from 'react';
+
+// Step 1: Define the state type for `Counter`
+interface CounterState {
+  count: number; // `count` must be a number
+}
+
+// Step 2: Define the `Counter` class component with types for props and state
+class Counter extends Component<{}, CounterState> {
+  // Step 3: Define initial state with typed state interface
+  state: CounterState = {
+    count: 0
+  };
+
+  // Step 4: Type the `increment` method
+  increment = (): void => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+Explanation
+The CounterState interface defines the state’s shape, ensuring count is a number.
+By specifying Component<{}, CounterState>, I define that Counter has no props and has a state of type CounterState.
+The increment method returns void, and setState is aware that count is always a number.
